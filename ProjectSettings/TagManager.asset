@@ -7,6 +7,9 @@ TagManager:
   - HeadTracker
   - porte
   - tuile
+  - FxTemporaire
+  - projectile
+  - main
   layers:
   - Default
   - TransparentFX

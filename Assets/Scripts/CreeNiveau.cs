@@ -2,28 +2,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum EtatPorte { EXTERIEUR, MITOYEN, PORTE };
+
+public class Mur
+{
+    public EtatPorte porte = EtatPorte.EXTERIEUR;
+    public Vector3 position;
+    public Quaternion direction;
+    public GameObject mur;
+    public Salle salle1 = null;
+    public Salle salle2 = null;
+}
+
+public class Salle
+{
+    public GameObject tuile = null;
+    public Mur nord = null;
+    public Mur est = null;
+    public Mur sud = null;
+    public Mur ouest = null;
+}
+
 public class CreeNiveau : MonoBehaviour {
-
-    public enum EtatPorte {EXTERIEUR, MITOYEN, PORTE};
-
-    public class Mur
-    {
-        public EtatPorte porte = EtatPorte.EXTERIEUR;
-        public Vector3 position;
-        public Quaternion direction;
-        public GameObject mur;
-        public Salle salle1 = null;
-        public Salle salle2 = null;
-    }
-
-    public class Salle
-    {
-        public GameObject tuile = null;
-        public Mur nord = null;
-        public Mur est = null;
-        public Mur sud = null;
-        public Mur ouest = null;
-    }  
 
     //Variables publiques pour l'integration
     public float distanceDeReference;
@@ -38,8 +38,8 @@ public class CreeNiveau : MonoBehaviour {
     private GameObject[] portesRefs;
     private float etalon;
 
-    private List<Salle> salles;
-    private List<Mur> contacts;
+    static private List<Salle> salles;
+    static private List<Mur> contacts;
 
 	// Use this for initialization
 	void Start () {
@@ -52,6 +52,7 @@ public class CreeNiveau : MonoBehaviour {
         creeMurs();
         creeMursRestants();
         effaceBlocs();
+        ajustePremiereSalle();
 	}
 
     void recaleElements()
@@ -178,7 +179,7 @@ public class CreeNiveau : MonoBehaviour {
         {
             if (contactActuel.position.x == porte.transform.position.x && contactActuel.position.z == porte.transform.position.z)
             {
-                contactActuel.porte = EtatPorte.PORTE;
+                contactActuel.porte = EtatPorte.PORTE;                
             }
         }
     }
@@ -193,7 +194,7 @@ public class CreeNiveau : MonoBehaviour {
             }
             else
             {
-                Instantiate(murporte, contact.position, contact.direction);
+                contact.mur = Instantiate(murporte, contact.position, contact.direction);
             }
         }
     }
@@ -231,7 +232,41 @@ public class CreeNiveau : MonoBehaviour {
             porte.SetActive(false);
         }
     }
-    
+
+    void ajustePremiereSalle()
+    {
+        BougeCameraRig mouvement = GetComponent<BougeCameraRig>();
+        mouvement.salleActive = renvoieSalle(mouvement.salleDepart);
+    }
+
+    static public Mur renvoieMur(GameObject objet)
+    {
+        Mur retour = null;
+        foreach (Mur mur in contacts)
+        {
+            if (mur.mur == objet)
+            {
+                retour = mur;
+                break;
+            }
+        }
+        return retour;
+    }
+
+    static public Salle renvoieSalle(GameObject objet)
+    {
+        Salle retour = null;
+        foreach (Salle salle in salles)
+        {
+            if (salle.tuile == objet)
+            {
+                retour = salle;
+                break;
+            }
+        }
+        return retour;
+    }
+
     // Update is called once per frame
     void Update () {		
 	}

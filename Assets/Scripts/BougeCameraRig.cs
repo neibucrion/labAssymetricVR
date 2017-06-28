@@ -8,15 +8,21 @@ public class BougeCameraRig : MonoBehaviour {
     public GameObject cameraRig;
     public GameObject controllerRight;
     public GameObject controllerLeft;
+    public float delaiRepositionnement;
 
     [HideInInspector]
     public Salle salleActive;
 
-    private Vector3 memPosManette;
-    private float memRotManetteY;
     private Vector3 memDifferentiel;
-    private Quaternion memRotDifferentiel;
+    private float memDiffRotationY;
     private GameObject mainActuelle;
+
+    private Vector3 positionDepart;
+    private Quaternion rotationDepart;
+    private Vector3 positionSouhaitee;
+    private Quaternion rotationSouhaitee;
+    private float dureeRepositionnement;
+    private bool repositionnementEnCours = false;
 
     // Use this for initialization
     void Start () {
@@ -25,12 +31,7 @@ public class BougeCameraRig : MonoBehaviour {
         {
             porte.gereMouvement = this;
         }
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+	}	
 
     public void changePiece(Mur porte)
     {
@@ -50,9 +51,9 @@ public class BougeCameraRig : MonoBehaviour {
         salleActive = nouvelleSalle;
     }
 
-    public void choisitMainActuelle(bool mainChoisie)
+    public void choisitMainActuelle()
     {
-        if (mainChoisie)
+        if (Input.GetButton("TriggerRight"))
         {
             mainActuelle = controllerRight;
         }
@@ -60,24 +61,81 @@ public class BougeCameraRig : MonoBehaviour {
         {
             mainActuelle = controllerLeft;
         }
+        memoriseValeurs();
     }
 
     public void memoriseValeurs()
     {
-        memPosManette = mainActuelle.transform.position;
-        memRotManetteY = mainActuelle.transform.rotation.eulerAngles.y;
         memDifferentiel = cameraRig.transform.position - mainActuelle.transform.position;
-        float diffY = cameraRig.transform.rotation.eulerAngles.y - mainActuelle.transform.rotation.eulerAngles.y;
-        memRotDifferentiel = Quaternion.Euler(0.0f, diffY, 0.0f);
+        memDiffRotationY = cameraRig.transform.rotation.eulerAngles.y - mainActuelle.transform.rotation.eulerAngles.y;       
     }
 
     public void recaleCameraRig()
     {
-        Vector3 posRelative = mainActuelle.transform.position - memPosManette;
-        cameraRig.transform.position = memPosManette + posRelative + memDifferentiel;
-        float diffY = memRotManetteY + (mainActuelle.transform.rotation.eulerAngles.y - memRotManetteY);
-        cameraRig.transform.rotation = Quaternion.Euler(0.0f, diffY, 0.0f);
+        cameraRig.transform.position = mainActuelle.transform.position + memDifferentiel;
+        float nouvY = mainActuelle.transform.rotation.eulerAngles.y + memDiffRotationY;
+        cameraRig.transform.rotation = Quaternion.Euler(0.0f, nouvY, 0.0f);
+    }
 
+    public void choisitPiece(Mur murActuel)
+    {
+        repositionnementEnCours = true;
+        dureeRepositionnement = 0.0f;
+        positionDepart = cameraRig.transform.position;
+        rotationDepart = cameraRig.transform.rotation;
+        Vector3 diffSalle1 = murActuel.salle1.tuile.transform.position - cameraRig.transform.position;
+        Vector3 diffSalle2 = murActuel.salle2.tuile.transform.position - cameraRig.transform.position;
+        if (diffSalle1.magnitude < diffSalle2.magnitude)
+        {
+            positionSouhaitee = murActuel.salle1.tuile.transform.position;
+
+        }
+        else
+        {
+            positionSouhaitee = murActuel.salle2.tuile.transform.position;
+        }
+        trouveRotationSouhaitee();        
+    }
+
+    private void trouveRotationSouhaitee()
+    {
+        Vector3 posManetteCameraRig = mainActuelle.transform.position - cameraRig.transform.position;
+        posManetteCameraRig.y = 0.0f;
+        if (Mathf.Abs(posManetteCameraRig.x) > Mathf.Abs(posManetteCameraRig.z))
+        {
+            posManetteCameraRig.z = 0.0f;
+        }
+        else
+        {
+            posManetteCameraRig.x = 0.0f;
+        }
+        rotationSouhaitee = Quaternion.LookRotation(posManetteCameraRig);
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (repositionnementEnCours)
+        {
+            repositionnePiece();
+        }
+    }
+
+    private void repositionnePiece()
+    {
+        dureeRepositionnement += Time.deltaTime;
+        if (dureeRepositionnement < delaiRepositionnement)
+        {
+            float rapport = dureeRepositionnement / delaiRepositionnement;
+            cameraRig.transform.position = Vector3.Lerp(positionDepart, positionSouhaitee, rapport);
+            cameraRig.transform.rotation = Quaternion.Lerp(rotationDepart, rotationSouhaitee, rapport);
+        }
+        else
+        {
+            repositionnementEnCours = false;
+            cameraRig.transform.position = positionSouhaitee;
+            cameraRig.transform.rotation = rotationSouhaitee;
+        }
     }
 
 }

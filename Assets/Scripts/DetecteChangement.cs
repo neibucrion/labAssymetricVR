@@ -32,7 +32,7 @@ public class DetecteChangement : MonoBehaviour {
         else if (mouvementEnCours && (!Input.GetButton("TriggerRight") && !Input.GetButton("TriggerLeft")))
         {
             mouvementEnCours = false;
-            mouvementActif = true;
+            mouvementActif = false;
             GameObject murObjet = transform.parent.gameObject;
             Mur murPiece = CreeNiveau.renvoieMur(murObjet);
             gereMouvement.choisitPiece(murPiece);

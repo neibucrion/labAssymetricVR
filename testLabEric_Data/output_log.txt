@@ -1,44 +1,123 @@
 Initialize engine version: 5.5.2f1 (3829d7f588f3)
 GfxDevice: creating device client; threaded=1
-Direct3D:
-    Version:  Direct3D 11.0 [level 11.1]
-    Renderer: NVIDIA GeForce GTX 1080 (ID=0x1b80)
-    Vendor:   NVIDIA
-    VRAM:     8110 MB
-    Driver:   22.21.13.8205
+VR: OpenVR Error! OpenVR failed initialization with error code VRInitError_Init_PathRegistryNotFound: "Installation path could not be located (110)"!
+ 
+(Filename:  Line: 954)
+
+Initialize engine version: 5.5.2f1 (3829d7f588f3)
+GfxDevice: creating device client; threaded=1
+VR: OpenVR Error! OpenVR failed initialization with error code VRInitError_Init_PathRegistryNotFound: "Installation path could not be located (110)"!
+ 
+(Filename:  Line: 954)
+
+Initialize engine version: 5.5.2f1 (3829d7f588f3)
+GfxDevice: creating device client; threaded=1
+VR: OpenVR Error! OpenVR failed initialization with error code VRInitError_Init_PathRegistryNotFound: "Installation path could not be located (110)"!
+ 
+(Filename:  Line: 954)
+
+DirDie3tct
+3: 
+V 
+e sVeoVni oDnre  DDDre1c.0D[ e11l  1[[]ee
+ve  R11.0e
+e
+ : NVIDIAreGeFoeceDIA G e(orDI0 8e3ForcI
+D 0 1Ve dor: 
+  IN VeId
+4   
+  AM:Indor
+    20AM: 
+A  
+    VRAM: 
+    2202v. M. 
+682 21.13.7682
+21.21.13.7682
 Begin MonoManager ReloadAssembly
-Platform assembly: C:\Users\IIFR\Desktop\VR Club\labAssymetricVR-master\testLabEric_Data\Managed\UnityEngine.dll (this message is harmless)
-Loading C:\Users\IIFR\Desktop\VR Club\labAssymetricVR-master\testLabEric_Data\Managed\UnityEngine.dll into Unity Child Domain
-Platform assembly: C:\Users\IIFR\Desktop\VR Club\labAssymetricVR-master\testLabEric_Data\Managed\Assembly-CSharp.dll (this message is harmless)
-Loading C:\Users\IIFR\Desktop\VR Club\labAssymetricVR-master\testLabEric_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
-Platform assembly: C:\Users\IIFR\Desktop\VR Club\labAssymetricVR-master\testLabEric_Data\Managed\UnityEngine.UI.dll (this message is harmless)
-Loading C:\Users\IIFR\Desktop\VR Club\labAssymetricVR-master\testLabEric_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
-Platform assembly: C:\Users\IIFR\Desktop\VR Club\labAssymetricVR-master\testLabEric_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
-Loading C:\Users\IIFR\Desktop\VR Club\labAssymetricVR-master\testLabEric_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
-Platform assembly: C:\Users\IIFR\Desktop\VR Club\labAssymetricVR-master\testLabEric_Data\Managed\UnityEngine.PlaymodeTestsRunner.dll (this message is harmless)
-Loading C:\Users\IIFR\Desktop\VR Club\labAssymetricVR-master\testLabEric_Data\Managed\UnityEngine.PlaymodeTestsRunner.dll into Unity Child Domain
-Platform assembly: C:\Users\IIFR\Desktop\VR Club\labAssymetricVR-master\testLabEric_Data\Managed\UnityEngine.VR.dll (this message is harmless)
-Loading C:\Users\IIFR\Desktop\VR Club\labAssymetricVR-master\testLabEric_Data\Managed\UnityEngine.VR.dll into Unity Child Domain
-- Completed reload, in  0.025 seconds
-Platform assembly: C:\Users\IIFR\Desktop\VR Club\labAssymetricVR-master\testLabEric_Data\Managed\System.Core.dll (this message is harmless)
-Platform assembly: C:\Users\IIFR\Desktop\VR Club\labAssymetricVR-master\testLabEric_Data\Managed\System.dll (this message is harmless)
+Begin MonoManager ReloadAsBeegiy
+ MonoManager ReloadAssembly
+Platform assembly: C:\Users\EricPlatarform as\emeebl: Vi\UoeseC\s\rriocD\CrluboVR\\JebA symeor  cCeReaetatinn\\CCl_uatba\Manbged\ymnetyrEcR\\ne.dlL bEEric_DetsaMaa aggdhdU\ilessn
+EngLda.d l hihiUseressagcs Dharbalrsless
+)
+iLoLd ireatiC:\Users\Eric\Dropbox\Jeux Vi\Users\re_t\ta\\alubVd\lnityEny ireadll \tnsuoaVEn\la AhsiMet rimain
+ityEngine.dData\Managed\UnityEn iDe.dll i
+nto Unity Child Domain
+PPatfaartr oasmessbebb:yCy Cs:\\U\sees\icririop\op\bpxuoxeuiedieeosidreroiatnioelCtbub\CRalabAylatAtricetRsiLcsELate_ErLtc\MaicagDaa\A\seam\gA-sAehsrly-CShCSrpa rl.dltlie ieh sa el sss)ge
+ is osshin
+gmless)
+ngs\arUc\D opb\xiseurroV\ErecseDropbtoxn eCx abtVdR\Cls aC\lsaytAtosicmRtrR\slLaAssryc_btrti\cVRaaedsALabearilcyDCsSamaMly-lSlhin\posdllily -tS irnddDymCinn
+d Uomity C
+hild Domain
+PPaatftfo a aseeemly:  C::\Users\EEric\\Dropbbxx\JeuuxxVViedeossr rCerotitCon\V\RulVublAbAaysmmeyrmcVtRV\VesetLLabEribEric_a\aaanagMa\\UnityEngtiEne.Ue..UI.hlh s(mtshagigei ss ssamm ess h
+)
+romleissi)g 
+:CUsoadserrgc\D:\\sprooxEoJx\JDuVxpde o iJreuts Vnideelusb\VRueVatiAas\AsesurVR\libAs\testLabERiatea\ML\bMrgncge\Dnata\ntaEea.eeI\Ud.di i igtoeUniIy.C lhd iDnmoamani
+
+ty Child Domain
+Platform asslablft:fm ra Usemsblyl C\\ serb\sr\ersx\Viribo\DrCreeo t\Jeeosl CbiaRtoib n\syatbtrni\lVb\tseystLricrRcettst\MancrVe_\DeniaL\Maragc_d\etwotyrnginne.e.d\UnlrkyEhi.dlee eshigorisks ar.dels(shg)s
+ meLoaaremnigsC:
+UseassEr)ic
+:\UDLosa\iEgrice\\x opbdooxriJe\Dirn\ibdue\Ve\lCxeAViion\trlubectRaonbtCssuEVet\iaaARsateMtaacVnricedDUaib\EEnganDe.Ne\wMotrkEnd\.neiNyitworkinN.yllhiking.dl nDtnt maUiil
+d Domld Do
+main
+PPaatffrmm  sssmmlyll:C:::\UsUeer\s\ricicoDbropxb\xJeeu Vxi eesd erCe Crtieo\t\CubbClulbbAssR\labAtcVymVteseLctLabestL_baataananaee\\UanityEngid\UPlitmooneTestsPRlanero.dell  sthihsRumessaagl l s his mess)e
+
+ssagLoadinLrmCadinU
+seC:\Ussr E:\iicers\Erix\JJeox bViideoux redetioioeatiul\ul\uaVlA\lAsetmymcriVVi\tVestLabErib_DDataaDaMaan\ged\UnittynEgtine..glaymoPeTestsdeTesers.dunlniir.dll ntnt ohild tD Cmin
+i
+ld Domain
+Platforrml tssermbly: C:\lUsers:EriU\\DropbbxxJeeuxVVdxeos ux Videon\ CreaVnonlablssVRbAtrbAmsytmicsiRttestLabEribEa_Data\tatna\Maned\tnEUgyne.VR.iVled.Vhidh lsesehise i  sar eaesse)h)r
+mleLso)diing C:\Users\E
+ric\DDding C:JUexx si\Erss \Dratioxn\JlluxVVi\abAAs yyreatricVR\tueVtLalbEbii_s_Dtt\i\VnaandgUniayEiginEnVtnedVla.iddl U nntt E Child DiodiiD.VR.dl
+n
+ into Unity Child Domain
+- Completed reload, in  4.311 seconds
+- Co plompletred relo inad, in 14 s.eco ss
+conds
+PlPlltarrmmosrem bssey C blUC:\Userss\EerrscD\DroocbbxoxJbJx\VideJdoox Creaeos Creation\ClR\bVu\Assbymasrimet\ieVitVRestLabEric\tMtt\Manabagysdce_stetme.dlelde(t hts tees.eogs. ie  iarisaesmles
+se 
+is harmless)
+PPatfoorf aaseaesey:l C::\U:\Useeri\ErDcoproox\bex\\JuxdVoVieCsreation\Cn\uatioR\\ClalbAusetricVR\testLabEric_Data\Managedged\S\System.dl ( tAssymmerssaag\testLarlEss)
+)
+ta\Managed\System.dll (this message is harmless)
 <RI> Initializing input.
-<RI> Input initialized.
-desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
-<RI> Initialized touch support.
-OpenVR initialized!
+<RI> Initializing input.
+<RI> Initializing input.
+<RI> Input initia<iz<d>I Innput iniiitiized.
+.
+desktop: 1366x768 60Hz; evkttop:a:3 lx 683 6668z6;8  v;iv0tu0u:
+l: 1366x768 at 0,00
+<RR>>  Itnalaielzzed toocsch sorp.rt
+.t.
+
+VR: OpeVR: RE renenV Er EoVo!f!Oilnd RnfViief iiletiann wathliioatnonco iiVh  eiroror cdede VnIaiitEeroortrIioi_Pu_PdathInstalittirou odFou d:o t"lIansbtel attiacneudtd 1no)ldbe 
  
-(Filename:  Line: 381)
+bFt lodname10) 1!
+ e
+"F5
+l
+(nF
+mle: ame: L Line:549)4)
 
-UnloadTime: 0.457580 ms
-Connected to lighthouse:LHR-35FCB899
+
+
+VR: OpenVR Error! OpenVR failed initialization with error code VRInitError_Init_PathRegistryNotFoundV RInEtrllotion !pOpteh couVRl odti R eElizoa!ioe  (n1h)"f!
  
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Setting up 2 worker threads for Enlighten.
-  Thread -> id: 3fcc -> priority: 1 
-  Thread -> id: 3b2c -> priority: 1 
-OpenVR Shutdown
+(Finie me: itiinrw:th ner_r
+o
+r cegisode VRInitError_Init_PathRegistryNotFound: e loctatellation path doul110)"!
  
-(Filename:  Line: 815)
+(Filename:  Line: d54)
 
+ be located (110)"!
+ 
+(Filename:  Line: 954)
+
+UnloadTime: 1.933776 ms
+UnloadTime: 2.108726 ms
+nloadTime: 2.107793 ms
+Setting up 1 worker threads for Enlighten.
+  Thread -etting up 1 worker Shtrinads for workEnlighten.
+ for Enlighten.
+    Threa -> > -> odity24b4iority: 1 
+iority: 1 

@@ -114,9 +114,15 @@ public class BougeCameraRig : MonoBehaviour {
     {
         rotationDepart = cameraRig.transform.rotation;
         Vector3 directionSouhaitee = objetSalle.transform.position - murActuel.mur.transform.position;
+        /*Quaternion directionDecalee = rotationDepart*Quaternion.LookRotation(directionSouhaitee);
+        float decalY = directionDecalee.eulerAngles.y;*/
         Quaternion rotationFinale = Quaternion.LookRotation(directionSouhaitee);
         float decalY = rotationFinale.eulerAngles.y - rotationDepart.eulerAngles.y;
         decalY = decalY % 90.0f;
+        if (Mathf.Abs(decalY) > 45.0f)
+        {
+            decalY = decalY - (90.0f*Mathf.Sign(decalY));
+        }
         rotationSouhaitee = Quaternion.Euler(0.0f, decalY, 0.0f);
     }
 

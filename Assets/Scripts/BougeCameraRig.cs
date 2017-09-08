@@ -15,6 +15,7 @@ public class BougeCameraRig : MonoBehaviour {
 
     private Vector3 memDepart;
     private float memRotationY;
+    private Vector3 memCameraRig;
     private GameObject mainActuelle;
 
     private Mur murActuel;
@@ -26,6 +27,8 @@ public class BougeCameraRig : MonoBehaviour {
     private float dureeRepositionnement;
     private bool repositionnementEnCours = false;
 
+    private GameObject poignee;
+
     // Use this for initialization
     void Start () {
         DetecteChangement[] portes = GameObject.FindObjectsOfType<DetecteChangement>();
@@ -33,7 +36,12 @@ public class BougeCameraRig : MonoBehaviour {
         {
             porte.gereMouvement = this;
         }
-	}	
+        GrabPoignee[] poignees = GameObject.FindObjectsOfType<GrabPoignee>();
+        foreach (GrabPoignee poignee in poignees)
+        {
+            poignee.gereMouvement = this;
+        }
+    }
 
     public void changePiece(Mur porte)
     {
@@ -70,7 +78,29 @@ public class BougeCameraRig : MonoBehaviour {
     {
         memDepart = mainActuelle.transform.position;
         memDepart.y = 0.0f;
-        memRotationY = mainActuelle.transform.rotation.eulerAngles.y;       
+        memRotationY = mainActuelle.transform.rotation.eulerAngles.y;
+        memCameraRig = cameraRig.transform.position;
+    }
+
+    public void tournePoignee(GameObject pg)
+    {
+        poignee = pg;
+        Vector3 directionVoulue = mainActuelle.transform.position - poignee.transform.position;
+        Quaternion rotationVoulue = Quaternion.LookRotation(directionVoulue, Vector3.forward);
+        Vector3 eulerVoulu = rotationVoulue.eulerAngles;
+        eulerVoulu.x = 0.0f;
+        rotationVoulue = Quaternion.Euler(eulerVoulu);
+        poignee.transform.rotation = rotationVoulue;
+        pivotePorte();
+    }
+
+    private void pivotePorte()
+    {
+        GameObject porte = poignee.transform.parent.gameObject;
+        Vector3 eulerPorte = new Vector3(0.0f, poignee.transform.rotation.eulerAngles.z);
+        porte.transform.rotation = Quaternion.Euler(eulerPorte);
+        Vector3 diffDistance = memCameraRig - porte.transform.position;
+        cameraRig.transform.position = porte.transform.position + (porte.transform.rotation*diffDistance);
     }
 
     public void recaleCameraRig()

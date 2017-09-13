@@ -5,7 +5,7 @@ using UnityEngine;
 public class GrabPoignee : MonoBehaviour {
 
     [HideInInspector]
-    public BougeCameraRig gereMouvement;
+    public BougeCameraRigQuentin gereMouvement;
 
     private bool mainActive = false;
     private bool grabEnCours = false;

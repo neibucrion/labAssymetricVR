@@ -13,7 +13,6 @@ public class BougeCameraRigQuentin : MonoBehaviour {
     [HideInInspector]
     public Salle salleActive;
 
-    private Vector3 memDepart;
     private GameObject mainActuelle;
 
     private Mur murActuel;
@@ -63,32 +62,24 @@ public class BougeCameraRigQuentin : MonoBehaviour {
         else
         {
             mainActuelle = controllerLeft;
-        }
-        memoriseValeurs();
+        }        
     }
 
     public void modifiePoignee(GameObject pg)
     {
         poignee = pg;
-        porteRotative = poignee.transform.parent.gameObject;
-        rotationDepartPorteY = porteRotative.transform.rotation.eulerAngles.y;
+        porteRotative = poignee.transform.parent.gameObject;        
         cameraRig.transform.SetParent(porteRotative.transform, true);
-    }
-
-    public void memoriseValeurs()
-    {
-        memDepart = mainActuelle.transform.position;
-        memDepart.y = 0.0f;
+        rotationDepartPorteY = porteRotative.transform.rotation.eulerAngles.y;
     }
 
     public void tournePoignee()
     {
         Vector3 directionVoulue = mainActuelle.transform.position - poignee.transform.position;
-        directionVoulue = poignee.transform.InverseTransformVector(directionVoulue);
+        directionVoulue = porteRotative.transform.InverseTransformVector(directionVoulue);
         directionVoulue.z = 0.0f;
-        directionVoulue = poignee.transform.TransformVector(directionVoulue);
         Quaternion rotationVoulue = Quaternion.LookRotation(directionVoulue);
-        poignee.transform.rotation = rotationVoulue;
+        poignee.transform.localRotation = rotationVoulue;
         Vector3 eulerPorte = new Vector3(0.0f, rotationDepartPorteY + poignee.transform.eulerAngles.z);
         porteRotative.transform.rotation = Quaternion.Euler(eulerPorte);
     }

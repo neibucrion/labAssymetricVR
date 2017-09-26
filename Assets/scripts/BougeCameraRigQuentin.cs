@@ -7,8 +7,9 @@ public class BougeCameraRigQuentin : MonoBehaviour {
     public GameObject salleDepart;
     public GameObject cameraRig;
     public GameObject controllerLeft;
-    public GameObject controllerRight;    
+    public GameObject controllerRight;
     public float delaiRepositionnement;
+	public float decalageYPoignee;
 
     [HideInInspector]
     public Salle salleActive;
@@ -21,6 +22,8 @@ public class BougeCameraRigQuentin : MonoBehaviour {
 
     private GameObject poignee;
     private GameObject porteRotative;
+	private Vector3 directionDepart;
+	private Quaternion departRotationPoignee;
     private float rotationDepartPorteY;
     private float decalZpoignee;
     private float delaiChoisi;
@@ -68,9 +71,15 @@ public class BougeCameraRigQuentin : MonoBehaviour {
     public void modifiePoignee(GameObject pg)
     {
         poignee = pg;
-        porteRotative = poignee.transform.parent.gameObject;        
+        porteRotative = poignee.transform.parent.gameObject;
+		//porteRotative = poignee.transform.parent.parent.gameObject; //QF  
         cameraRig.transform.SetParent(porteRotative.transform, true);
+		directionDepart = mainActuelle.transform.position - poignee.transform.position;
+		directionDepart = porteRotative.transform.InverseTransformVector(directionDepart);
+		directionDepart.z = 0.0f;
+		departRotationPoignee = poignee.transform.localRotation;
         rotationDepartPorteY = porteRotative.transform.rotation.eulerAngles.y;
+
     }
 
     public void tournePoignee()
@@ -78,8 +87,9 @@ public class BougeCameraRigQuentin : MonoBehaviour {
         Vector3 directionVoulue = mainActuelle.transform.position - poignee.transform.position;
         directionVoulue = porteRotative.transform.InverseTransformVector(directionVoulue);
         directionVoulue.z = 0.0f;
-        Quaternion rotationVoulue = Quaternion.LookRotation(directionVoulue);
-        poignee.transform.localRotation = rotationVoulue;
+		Quaternion rotationVoulue = Quaternion.FromToRotation(directionDepart, directionVoulue);
+        poignee.transform.localRotation = departRotationPoignee*rotationVoulue;
+		//poignee.transform.localPosition += poignee.transform.localRotation * (Vector3.up * decalageYPoignee);
         Vector3 eulerPorte = new Vector3(0.0f, rotationDepartPorteY + poignee.transform.eulerAngles.z);
         porteRotative.transform.rotation = Quaternion.Euler(eulerPorte);
     }

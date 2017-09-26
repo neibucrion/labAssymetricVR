@@ -236,7 +236,12 @@ public class CreeNiveau : MonoBehaviour {
     void ajustePremiereSalle()
     {
         BougeCameraRig mouvement = GetComponent<BougeCameraRig>();
-        mouvement.salleActive = renvoieSalle(mouvement.salleDepart);
+		if (mouvement != null) {
+			mouvement.salleActive = renvoieSalle(mouvement.salleDepart);
+		} else {
+			BougeCameraRigQuentin mouvementQuentin = GetComponent<BougeCameraRigQuentin>();
+			mouvementQuentin.salleActive = renvoieSalle(mouvementQuentin.salleDepart);
+		}
     }
 
     static public Mur renvoieMur(GameObject objet)

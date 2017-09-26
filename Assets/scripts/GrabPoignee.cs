@@ -25,7 +25,7 @@ public class GrabPoignee : MonoBehaviour {
             grabEnCours = true;
             grabActif = true;
             gereMouvement.choisitMainActuelle();
-            gereMouvement.modifiePoignee(gameObject);
+            gereMouvement.modifiePoignee(gameObject.transform.parent.gameObject);
         }
         else if (grabEnCours && ((!Input.GetButton("TriggerRight") && !Input.GetButton("TriggerLeft"))||mainActive == false))
         {

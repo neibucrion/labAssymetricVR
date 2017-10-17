@@ -9,14 +9,13 @@ public class BougeCameraRigQuentin : MonoBehaviour {
     public GameObject controllerLeft;
     public GameObject controllerRight;
     public float delaiRepositionnement;
-	public float decalageYPoignee;
 
     [HideInInspector]
     public Salle salleActive;
 
     private GameObject mainActuelle;
 
-    private Mur murActuel;
+	private GameObject murActuel;
     private float dureeRepositionnement;
     private bool repositionnementEnCours = false;
 
@@ -24,7 +23,8 @@ public class BougeCameraRigQuentin : MonoBehaviour {
     private GameObject porteRotative;
 	private Vector3 directionDepart;
 	private Quaternion departRotationPoignee;
-    private float rotationDepartPorteY;
+	private float rotationDepartPorteY;
+	private Quaternion rotationPorteRotative;
     private float decalZpoignee;
     private float delaiChoisi;
     private Quaternion rotationDepartPoignee;
@@ -72,14 +72,12 @@ public class BougeCameraRigQuentin : MonoBehaviour {
     {
         poignee = pg;
         porteRotative = poignee.transform.parent.gameObject;
-		//porteRotative = poignee.transform.parent.parent.gameObject; //QF  
         cameraRig.transform.SetParent(porteRotative.transform, true);
 		directionDepart = mainActuelle.transform.position - poignee.transform.position;
 		directionDepart = porteRotative.transform.InverseTransformVector(directionDepart);
 		directionDepart.z = 0.0f;
 		departRotationPoignee = poignee.transform.localRotation;
         rotationDepartPorteY = porteRotative.transform.rotation.eulerAngles.y;
-
     }
 
     public void tournePoignee()
@@ -89,12 +87,11 @@ public class BougeCameraRigQuentin : MonoBehaviour {
         directionVoulue.z = 0.0f;
 		Quaternion rotationVoulue = Quaternion.FromToRotation(directionDepart, directionVoulue);
         poignee.transform.localRotation = departRotationPoignee*rotationVoulue;
-		//poignee.transform.localPosition += poignee.transform.localRotation * (Vector3.up * decalageYPoignee);
         Vector3 eulerPorte = new Vector3(0.0f, rotationDepartPorteY + poignee.transform.eulerAngles.z);
         porteRotative.transform.rotation = Quaternion.Euler(eulerPorte);
     }
 
-    public void choisitPiece(Mur ma)
+	public void choisitPiece(GameObject ma)
     {
         murActuel = ma;
         repositionnementEnCours = true;
@@ -102,7 +99,21 @@ public class BougeCameraRigQuentin : MonoBehaviour {
         calculeValeursPoignee();
     }
 
-    GameObject trouveSalleChoisie()
+	void calculeValeursPoignee()
+	{
+		rotationDepartPoignee = poignee.transform.localRotation;
+		Quaternion decalage = Quaternion.Lerp(rotationDepartPoignee,Quaternion.identity,1.0f);
+		decalZpoignee = decalage.eulerAngles.z;
+		/*decalZpoignee = decalZpoignee % 180.0f;
+		if (Mathf.Abs(decalZpoignee) > 90.0f)
+		{
+			decalZpoignee = decalZpoignee - (180.0f * Mathf.Sign(decalZpoignee));
+		}*/
+		delaiChoisi = delaiRepositionnement * (Mathf.Abs(decalZpoignee) / 180.0f);
+		rotationPorteRotative = porteRotative.transform.rotation;
+	}
+
+    /*GameObject trouveSalleChoisie()
     {
         GameObject retour = null;
         Vector3 diffSalle1 = murActuel.salle1.tuile.transform.position - cameraRig.transform.position;
@@ -116,20 +127,7 @@ public class BougeCameraRigQuentin : MonoBehaviour {
             retour = murActuel.salle2.tuile;
         }
         return retour;
-    }
-
-    void calculeValeursPoignee()
-    {
-        rotationDepartPoignee = poignee.transform.rotation;
-        decalZpoignee = rotationDepartPoignee.eulerAngles.z;
-        decalZpoignee = decalZpoignee % 180.0f;
-        if (Mathf.Abs(decalZpoignee) > 90.0f)
-        {
-            decalZpoignee = decalZpoignee - (180.0f * Mathf.Sign(decalZpoignee));
-        }
-        delaiChoisi = delaiRepositionnement * (Mathf.Abs(decalZpoignee) / 180.0f);
-        rotationDepartPorteY = porteRotative.transform.rotation.eulerAngles.y;
-    }
+    }*/
 
     // Update is called once per frame
     void Update()
@@ -142,18 +140,21 @@ public class BougeCameraRigQuentin : MonoBehaviour {
 
     private void repositionnePoignee()
     {
+		dureeRepositionnement += Time.deltaTime;
         if (dureeRepositionnement < delaiChoisi)
         {
-            float decalageZ = decalZpoignee*(dureeRepositionnement / delaiChoisi);
-            modifieZRotation(poignee, decalageZ);
+            float decalageZ = (dureeRepositionnement / delaiChoisi);
+			/*modifieZRotation(poignee, decalageZ);
             Vector3 eulerPorte = new Vector3(0.0f, rotationDepartPorteY + decalageZ);
-            porteRotative.transform.rotation = Quaternion.Euler(eulerPorte);
+            porteRotative.transform.rotation = Quaternion.Euler(eulerPorte);*/
+			poignee.transform.localRotation = Quaternion.Lerp (Quaternion.identity, rotationDepartPoignee, decalageZ);
+			porteRotative.transform.rotation = Quaternion.Lerp (murActuel.transform.rotation, rotationPorteRotative, decalageZ);
         }
         else
         {
             repositionnementEnCours = false;
-            modifieZRotation(poignee, 0.0f);
-            porteRotative.transform.rotation = porteRotative.transform.parent.rotation;
+			poignee.transform.localRotation = Quaternion.identity;
+			porteRotative.transform.rotation = murActuel.transform.rotation;
             cameraRig.transform.SetParent(transform.root, true);
         }
     }

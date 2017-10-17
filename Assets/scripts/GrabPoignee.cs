@@ -25,22 +25,24 @@ public class GrabPoignee : MonoBehaviour {
             grabEnCours = true;
             grabActif = true;
             gereMouvement.choisitMainActuelle();
+<<<<<<< HEAD
+            gereMouvement.modifiePoignee(transform.parent.gameObject);
+=======
             gereMouvement.modifiePoignee(gameObject.transform.parent.gameObject);
+>>>>>>> 2098ac5620ae3ed459c09b0d3f5ca3f0fb6e3466
         }
         else if (grabEnCours && ((!Input.GetButton("TriggerRight") && !Input.GetButton("TriggerLeft"))||mainActive == false))
         {
             grabEnCours = false;
             grabActif = false;
             GameObject murObjet = transform.parent.gameObject.transform.parent.gameObject;
-            Mur murPiece = CreeNiveau.renvoieMur(murObjet);
-            gereMouvement.choisitPiece(murPiece);
+			gereMouvement.choisitPiece(murObjet);
         }
         else if (grabEnCours)
         {
             gereMouvement.tournePoignee();
         }
     }
-
 
 
     private void OnTriggerEnter(Collider other)

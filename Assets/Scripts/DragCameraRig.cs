@@ -12,7 +12,6 @@ public class DragCameraRig : MonoBehaviour {
 	private bool rotationActive = false;
 	private Vector3 departMain;
 	private float memRotationY;
-	Quaternion rotationDepart;
 	
 	// Update is called once per frame
 	void Update () {
@@ -41,7 +40,6 @@ public class DragCameraRig : MonoBehaviour {
 		departMain = manette.transform.position;
 		departMain.y = 0.0f;
 		memRotationY = manette.transform.rotation.eulerAngles.y;
-		rotationDepart = cameraRig.transform.rotation;
 	}
 
 	void recaleCameraRig()

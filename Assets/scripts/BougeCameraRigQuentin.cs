@@ -23,6 +23,7 @@ public class BougeCameraRigQuentin : MonoBehaviour {
     private GameObject porteRotative;
 	private Vector3 directionDepart;
 	private Quaternion departRotationPoignee;
+	private Quaternion finRotationPoignee;
 	private float rotationDepartPorteY;
 	private Quaternion rotationPorteRotative;
     private float decalZpoignee;
@@ -102,13 +103,15 @@ public class BougeCameraRigQuentin : MonoBehaviour {
 	void calculeValeursPoignee()
 	{
 		rotationDepartPoignee = poignee.transform.localRotation;
-		Quaternion decalage = Quaternion.Lerp(rotationDepartPoignee,Quaternion.identity,1.0f);
-		decalZpoignee = decalage.eulerAngles.z;
-		/*decalZpoignee = decalZpoignee % 180.0f;
+		/*Quaternion arrivee = Quaternion.identity;
+		Quaternion decalage = Quaternion.Lerp(rotationDepartPoignee,arrivee,1.0f);
+		decalZpoignee = decalage.eulerAngles.z;*/
+		decalZpoignee = rotationDepartPoignee.eulerAngles.z;
+		decalZpoignee = decalZpoignee % 180.0f;
 		if (Mathf.Abs(decalZpoignee) > 90.0f)
 		{
 			decalZpoignee = decalZpoignee - (180.0f * Mathf.Sign(decalZpoignee));
-		}*/
+		}
 		delaiChoisi = delaiRepositionnement * (Mathf.Abs(decalZpoignee) / 180.0f);
 		rotationPorteRotative = porteRotative.transform.rotation;
 	}
@@ -145,16 +148,16 @@ public class BougeCameraRigQuentin : MonoBehaviour {
         {
             float decalageZ = (dureeRepositionnement / delaiChoisi);
 			/*modifieZRotation(poignee, decalageZ);
-            Vector3 eulerPorte = new Vector3(0.0f, rotationDepartPorteY + decalageZ);
-            porteRotative.transform.rotation = Quaternion.Euler(eulerPorte);*/
-			poignee.transform.localRotation = Quaternion.Lerp (Quaternion.identity, rotationDepartPoignee, decalageZ);
+            Vector3 eulerPorte = new Vector3(0.0f, 0.0f, rotationDepartPorteY + decalageZ);
+            porteRotative.transform.rotation = Quaternion.Euler(eulerPorte);
+			poignee.transform.localRotation = Quaternion.Lerp (Quaternion.identity, rotationDepartPoignee, decalageZ);*/
 			porteRotative.transform.rotation = Quaternion.Lerp (murActuel.transform.rotation, rotationPorteRotative, decalageZ);
         }
         else
         {
             repositionnementEnCours = false;
 			poignee.transform.localRotation = Quaternion.identity;
-			porteRotative.transform.rotation = murActuel.transform.rotation;
+			porteRotative.transform.localRotation = Quaternion.identity;
             cameraRig.transform.SetParent(transform.root, true);
         }
     }
